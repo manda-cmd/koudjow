@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koudjow • L'Élégance qui Autonomise</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <style>
+    .hero-bg {
+      background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), 
+                        url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=2070');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #10b981, #eab308, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .product-card {
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-20px) scale(1.05);
+      box-shadow: 0 30px 60px -15px rgb(16 185 129 / 0.3);
+    }
+  </style>
+</head>
+<body class="font-sans overflow-x-hidden">
+
+  <!-- Navbar -->
+  <nav class="bg-white/95 backdrop-blur-md shadow-xl fixed w-full z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 via-yellow-400 to-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-md group-hover:scale-105 transition-transform">
+          K
+        </div>
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-yellow-500 bg-clip-text text-transparent">Koudjow</h1>
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden lg:flex items-center gap-8 text-base font-medium text-gray-700">
+        <a href="index.html" class="text-emerald-600 font-semibold flex items-center gap-1">Accueil</a>
+        <a href="atelier_luftanza.html" class="hover:text-emerald-600 transition">L'Atelier</a>
+        <a href="boutique.html" class="hover:text-emerald-600 transition">Boutique</a>
+        <a href="a_propos.html" class="hover:text-emerald-600 transition">À Propos</a>
+        <button onclick="openDonateModal()" class="hover:text-emerald-600 transition text-pink-600 font-semibold flex items-center gap-1">
+          <i class="fa-solid fa-heart animate-pulse"></i> Donner
+        </button>
+      </div>
+
+      <!-- Action Button & Hamburger -->
+      <div class="flex items-center gap-4">
+        <button onclick="openDonateModal()" class="hidden sm:flex bg-gradient-to-r from-pink-500 via-yellow-400 to-emerald-500 text-white px-6 py-2.5 rounded-full font-semibold items-center gap-2 hover:scale-105 transition shadow-md text-sm">
+          <i class="fa-solid fa-heart"></i>
+          <span>Faire un Don</span>
+        </button>
+        
+        <button id="mobile-menu-btn" class="lg:hidden text-gray-700 focus:outline-none">
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer (Menu) -->
+    <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
+    
+    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-80 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-6">
+      <div>
+        <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-gradient-to-br from-emerald-500 via-yellow-400 to-pink-500 rounded-xl flex items-center justify-center text-white text-lg font-bold shadow-md">
+              K
+            </div>
+            <span class="text-xl font-bold bg-gradient-to-r from-emerald-600 to-yellow-500 bg-clip-text text-transparent">Koudjow</span>
+          </div>
+          <button onclick="closeSidebar()" class="text-gray-500 hover:text-gray-700 text-2xl focus:outline-none">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <nav class="space-y-4 text-lg font-medium text-gray-700">
+          <a href="index.html" class="flex items-center gap-3 p-3 rounded-2xl bg-emerald-50 text-emerald-600 transition">
+            <i class="fa-solid fa-house text-emerald-500 w-6 text-center"></i> Accueil
+          </a>
+          <a href="atelier_luftanza.html" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-600 transition">
+            <i class="fa-solid fa-scissors text-emerald-500 w-6 text-center"></i> L'Atelier
+          </a>
+          <a href="boutique.html" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-600 transition">
+            <i class="fa-solid fa-bag-shopping text-emerald-500 w-6 text-center"></i> Boutique
+          </a>
+          <a href="a_propos.html" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-600 transition">
+            <i class="fa-solid fa-circle-info text-emerald-500 w-6 text-center"></i> À Propos
+          </a>
+        </nav>
+      </div>
+
+      <div class="space-y-4">
+        <button onclick="openDonateModal(); closeSidebar();" class="w-full bg-gradient-to-r from-pink-500 to-yellow-500 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] transition">
+          <i class="fa-solid fa-heart animate-pulse"></i> Faire un don
+        </button>
+        <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20cr%C3%A9ations." target="_blank" class="w-full border-2 border-emerald-600 text-emerald-700 py-3.5 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-50 transition">
+          <i class="fa-solid fa-whatsapp text-lg"></i> Nous contacter
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-bg h-screen flex items-center text-white pt-20">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p class="uppercase tracking-[6px] text-yellow-300 text-sm mb-4" data-aos="fade-down">Kara • Togo</p>
+      
+      <h1 class="text-6xl md:text-7xl font-bold leading-tight mb-6" data-aos="fade-up" data-aos-delay="200">
+        Chaque fil raconte<br>une histoire de <span class="gradient-text">couleur & liberté</span>
+      </h1>
+      
+      <p class="text-2xl max-w-3xl mx-auto mb-12 text-white/90" data-aos="fade-up" data-aos-delay="400">
+        Créations artisanales vibrantes • Atelier de Lufthansa<br>
+        Mode togolaise qui change des vies
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-6 justify-center" data-aos="fade-up" data-aos-delay="600">
+        <a href="boutique.html" class="bg-white text-gray-900 px-10 py-5 rounded-3xl text-xl font-semibold hover:bg-yellow-300 transition flex items-center justify-center gap-3 hover:scale-105 shadow-xl">
+          Explorer la Boutique
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="atelier_luftanza.html" class="border-2 border-white hover:bg-white hover:text-gray-900 px-10 py-5 rounded-3xl text-xl font-semibold transition hover:scale-105">
+          Découvrir l'Atelier
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Stats -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div data-aos="fade-up">
+          <h3 class="text-5xl font-bold text-emerald-600 counter" data-target="250">0</h3>
+          <p class="text-gray-600 mt-2">Femmes formées</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-5xl font-bold text-emerald-600 counter" data-target="1800">0</h3>
+          <p class="text-gray-600 mt-2">Produits créés</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-5xl font-bold text-emerald-600 counter" data-target="12">0</h3>
+          <p class="text-gray-600 mt-2">Collections</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="300">
+          <h3 class="text-5xl font-bold text-emerald-600">100<span class="text-3xl">%</span></h3>
+          <p class="text-gray-600 mt-2">Fait main à Kara</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Domaines d'Action -->
+  <section class="py-24 bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-emerald-600 font-bold uppercase tracking-wider text-sm">Nos Domaines d'Action</span>
+        <h2 class="text-4xl md:text-5xl font-bold mt-2 text-gray-900 leading-tight">
+          Notre engagement pour le développement durable à Kara
+        </h2>
+        <p class="text-gray-600 mt-4 text-lg">
+          Un programme multisectoriel porteur de croissance et aligné sur le Plan National de Développement (PND) pour autonomiser les populations vulnérables.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Card 1 -->
+        <div class="bg-gradient-to-br from-emerald-50/55 to-white border border-emerald-100/50 rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition duration-300 flex flex-col justify-between" data-aos="fade-up">
+          <div>
+            <div class="w-14 h-14 bg-emerald-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-emerald-500/20">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3 class="font-bold text-xl text-gray-900 mb-3">Éducation & Formation</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Formation professionnelle aux métiers (couture, teinture, tissage, savonnerie) pour l'autonomisation des orphelins, personnes handicapées et jeunes filles déscolarisées.
+            </p>
+          </div>
+          <a href="a_propos.html" class="mt-6 text-emerald-600 font-semibold text-sm inline-flex items-center gap-2 hover:text-emerald-700">
+            En savoir plus <i class="fa-solid fa-chevron-right text-xs"></i>
+          </a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-gradient-to-br from-yellow-50/50 to-white border border-yellow-100/50 rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+          <div>
+            <div class="w-14 h-14 bg-yellow-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-yellow-500/20">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <h3 class="font-bold text-xl text-gray-900 mb-3">Protection de l'Environnement</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Programmes de reboisement, promotion des pesticides naturels à base de graines de neem et sensibilisation aux pratiques écoresponsables.
+            </p>
+          </div>
+          <a href="a_propos.html" class="mt-6 text-yellow-600 font-semibold text-sm inline-flex items-center gap-2 hover:text-yellow-700">
+            En savoir plus <i class="fa-solid fa-chevron-right text-xs"></i>
+          </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-gradient-to-br from-pink-50/50 to-white border border-pink-100/50 rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+          <div>
+            <div class="w-14 h-14 bg-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-pink-500/20">
+              <i class="fa-solid fa-kit-medical"></i>
+            </div>
+            <h3 class="font-bold text-xl text-gray-900 mb-3">Solidarité & Santé</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Aide d'urgence aux personnes touchées par des crises, cliniques mobiles, fourniture de matériel médical et campagnes de santé préventive.
+            </p>
+          </div>
+          <a href="a_propos.html" class="mt-6 text-pink-600 font-semibold text-sm inline-flex items-center gap-2 hover:text-pink-700">
+            En savoir plus <i class="fa-solid fa-chevron-right text-xs"></i>
+          </a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-gradient-to-br from-teal-50/50 to-white border border-teal-100/50 rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition duration-300 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+          <div>
+            <div class="w-14 h-14 bg-teal-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-teal-500/20">
+              <i class="fa-solid fa-wheat-awn"></i>
+            </div>
+            <h3 class="font-bold text-xl text-gray-900 mb-3">Entrepreneuriat & Agriculture</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Soutien à l'agriculture durable, transformation alimentaire locale et accompagnement à la création d'activités génératrices de revenus.
+            </p>
+          </div>
+          <a href="a_propos.html" class="mt-6 text-teal-600 font-semibold text-sm inline-flex items-center gap-2 hover:text-teal-700">
+            En savoir plus <i class="fa-solid fa-chevron-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- L'Atelier Lufthansa -->
+  <section class="py-24 bg-gradient-to-br from-emerald-50 to-yellow-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div data-aos="fade-right">
+          <div class="inline-block bg-gradient-to-r from-pink-500 to-yellow-400 text-white px-6 py-2 rounded-3xl text-sm font-medium">
+            Lufthansa • Kara
+          </div>
+          <h2 class="text-5xl font-bold leading-tight mt-6 mb-8 text-gray-900">Un atelier qui fait vibrer le Togo</h2>
+          <p class="text-xl text-gray-700">
+            Couleurs éclatantes, savoir-faire ancestral et autonomisation des femmes. 
+            Chaque création est une explosion de vie.
+          </p>
+          <a href="atelier_luftanza.html" class="inline-flex mt-8 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-8 py-4 rounded-3xl text-lg items-center gap-3 hover:scale-105 transition shadow-lg">
+            Visiter l'atelier <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+        <div data-aos="fade-left" class="rounded-3xl overflow-hidden shadow-2xl">
+          <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=2070" 
+               alt="Atelier Lufthansa" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Produits Phares -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-4 bg-gradient-to-r from-emerald-600 to-pink-500 bg-clip-text text-transparent" data-aos="fade-up">
+        Nos Créations Vibrantes
+      </h2>
+      <p class="text-center text-gray-600 mb-12" data-aos="fade-up" data-aos-delay="100">Explosion de couleurs made in Lufthansa</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-xl" data-aos="fade-up">
+          <div class="aspect-square overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1622445275576-721325763afe?q=80&w=2070" 
+                 class="w-full h-full object-cover hover:scale-110 transition duration-500" alt="">
+          </div>
+          <div class="p-6">
+            <h4 class="font-semibold text-xl">Pagne Indigo Royal</h4>
+            <p class="text-emerald-600 font-bold text-lg">28 000 CFA</p>
+          </div>
+        </div>
+
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="100">
+          <div class="aspect-square overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1591343395084-7c4e9c3f8e0f?q=80&w=2070" 
+                 class="w-full h-full object-cover hover:scale-110 transition duration-500" alt="">
+          </div>
+          <div class="p-6">
+            <h4 class="font-semibold text-xl">Ensemble Bogolan Soleil</h4>
+            <p class="text-emerald-600 font-bold text-lg">52 000 CFA</p>
+          </div>
+        </div>
+
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="200">
+          <div class="aspect-square overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1585487000160-6eb1fcb7c0a3?q=80&w=2070" 
+                 class="w-full h-full object-cover hover:scale-110 transition duration-500" alt="">
+          </div>
+          <div class="p-6">
+            <h4 class="font-semibold text-xl">Robe Fleur Tropicale</h4>
+            <p class="text-emerald-600 font-bold text-lg">35 000 CFA</p>
+          </div>
+        </div>
+
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="300">
+          <div class="aspect-square overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1604176354201-9268730608-1d5f8e7e8b3f?q=80&w=2070" 
+                 class="w-full h-full object-cover hover:scale-110 transition duration-500" alt="">
+          </div>
+          <div class="p-6">
+            <h4 class="font-semibold text-xl">Écharpe Arc-en-ciel</h4>
+            <p class="text-emerald-600 font-bold text-lg">18 000 CFA</p>
+          </div>
+        </div>
+
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="400">
+          <div class="aspect-square overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=2070" 
+                 class="w-full h-full object-cover hover:scale-110 transition duration-500" alt="">
+          </div>
+          <div class="p-6">
+            <h4 class="font-semibold text-xl">Pagne Wax Explosion</h4>
+            <p class="text-emerald-600 font-bold text-lg">30 000 CFA</p>
+          </div>
+        </div>
+
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="500">
+          <div class="aspect-square overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1585138341298-885ed6a53ee6?q=80&w=2070" 
+                 class="w-full h-full object-cover hover:scale-110 transition duration-500" alt="">
+          </div>
+          <div class="p-6">
+            <h4 class="font-semibold text-xl">Chemise Homme Teinte</h4>
+            <p class="text-emerald-600 font-bold text-lg">38 000 CFA</p>
+          </div>
+        </div>
+
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="600">
+          <div class="aspect-square overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1594876797587-52b3a04e0a84?q=80&w=2070" 
+                 class="w-full h-full object-cover hover:scale-110 transition duration-500" alt="">
+          </div>
+          <div class="p-6">
+            <h4 class="font-semibold text-xl">Ensemble Femme Pagne</h4>
+            <p class="text-emerald-600 font-bold text-lg">48 000 CFA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Donation -->
+  <section class="py-24 bg-gradient-to-br from-pink-500 via-yellow-400 to-emerald-500 text-white">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="text-5xl font-bold mb-6" data-aos="fade-up">Faites briller leur avenir</h2>
+      <p class="text-2xl mb-12" data-aos="fade-up" data-aos-delay="100">Votre don = Plus de couleurs, plus d'autonomie</p>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white/20 backdrop-blur-md rounded-3xl p-8 hover:scale-105 transition" data-aos="zoom-in">
+          <h3 class="text-4xl font-bold mb-2">5 000 CFA</h3>
+          <p class="text-yellow-200">Teintures & fils</p>
+        </div>
+        <div class="bg-white/20 backdrop-blur-md rounded-3xl p-8 hover:scale-105 transition border-2 border-white" data-aos="zoom-in" data-aos-delay="100">
+          <h3 class="text-4xl font-bold mb-2">15 000 CFA</h3>
+          <p class="text-yellow-200">Formation complète</p>
+        </div>
+        <div class="bg-white/20 backdrop-blur-md rounded-3xl p-8 hover:scale-105 transition" data-aos="zoom-in" data-aos-delay="200">
+          <h3 class="text-4xl font-bold mb-2">50 000 CFA</h3>
+          <p class="text-yellow-200">Soutien atelier</p>
+        </div>
+      </div>
+
+      <button onclick="openDonateModal()" class="mt-16 bg-white text-pink-600 px-14 py-6 rounded-3xl text-2xl font-semibold hover:scale-110 transition flex items-center gap-4 mx-auto shadow-2xl" data-aos="fade-up">
+        <i class="fa-solid fa-hand-holding-heart"></i>
+        Je fais un don maintenant
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 text-gray-300 pt-20 pb-10 border-t border-gray-900">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 via-yellow-400 to-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-md">
+            K
+          </div>
+          <span class="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-yellow-300 bg-clip-text text-transparent">Koudjow</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Association à but non lucratif basée à Kara, Togo. Nous œuvrons pour l'indépendance économique des femmes et des jeunes filles à travers la valorisation et la modernisation des textiles traditionnels.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-bold text-lg">Navigation</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="index.html" class="hover:text-emerald-400 transition">Accueil</a></li>
+          <li><a href="atelier_luftanza.html" class="hover:text-emerald-400 transition">L'Atelier Lufthansa</a></li>
+          <li><a href="boutique.html" class="hover:text-emerald-400 transition">La Boutique</a></li>
+          <li><a href="a_propos.html" class="hover:text-emerald-400 transition">À Propos</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-bold text-lg">Contact</h4>
+        <ul class="space-y-3 text-sm text-gray-400">
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-location-dot text-emerald-500 mt-1"></i>
+            <span>Quartier Lufthansa, Kara, Togo</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-phone text-emerald-500"></i>
+            <span>+228 90 12 34 56</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-envelope text-emerald-500"></i>
+            <span>contact@koudjow-association.org</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-bold text-lg">Transparence</h4>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          100% de vos dons soutiennent directement nos programmes de formation à Kara. Association enregistrée au Ministère de l'Administration Territoriale du Togo.
+        </p>
+        <button onclick="openDonateModal()" class="w-full bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 text-white font-semibold py-3 px-6 rounded-2xl transition duration-300 flex items-center justify-center gap-2 shadow-lg">
+          <i class="fa-solid fa-heart text-white"></i> Faire un don
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-gray-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+      <p>&copy; 2026 Association Koudjow. Tous droits réservés.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white transition">Mentions légales</a>
+        <a href="#" class="hover:text-white transition">Politique de confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Donation Modal -->
+  <div id="donate-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl max-w-lg w-full mx-4 overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative">
+      <div class="bg-gradient-to-r from-emerald-600 to-teal-500 text-white px-8 py-6 relative">
+        <h3 class="text-2xl font-bold">Faire un don à Koudjow</h3>
+        <p class="text-white/80 text-sm mt-1">Soutenez l'autonomisation des femmes de Kara</p>
+        <button onclick="closeDonateModal()" class="absolute top-6 right-6 text-white hover:text-yellow-300 text-2xl font-bold transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-8 space-y-6 max-h-[65vh] overflow-y-auto">
+        <div class="bg-emerald-50 rounded-2xl p-4 flex gap-3 text-emerald-800 text-sm">
+          <i class="fa-solid fa-circle-info text-emerald-600 text-lg mt-0.5"></i>
+          <p>Chaque don est intégralement utilisé pour financer des machines à coudre, des fournitures de teinture et des bourses de formation professionnelle pour les femmes vulnérables.</p>
+        </div>
+
+        <div class="space-y-4">
+          <h4 class="font-bold text-gray-800">Choisissez votre moyen de paiement :</h4>
+
+          <div class="border border-gray-200 rounded-2xl p-4 hover:border-emerald-500 transition duration-300">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-semibold text-gray-800 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                T-Money (Togo)
+              </span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-medium">Recommandé</span>
+            </div>
+            <p class="text-gray-600 text-sm">Envoyer au numéro : <strong class="text-gray-900">+228 90 12 34 56</strong></p>
+            <p class="text-gray-500 text-xs mt-1">Nom : Association Koudjow</p>
+          </div>
+
+          <div class="border border-gray-200 rounded-2xl p-4 hover:border-emerald-500 transition duration-300">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-semibold text-gray-800 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                Moov Money / Flooz
+              </span>
+            </div>
+            <p class="text-gray-600 text-sm">Envoyer au numéro : <strong class="text-gray-900">+228 99 87 65 43</strong></p>
+            <p class="text-gray-500 text-xs mt-1">Nom : Association Koudjow</p>
+          </div>
+
+          <div class="border border-gray-200 rounded-2xl p-4 hover:border-emerald-500 transition duration-300">
+            <span class="font-semibold text-gray-800 flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+              Virement Bancaire & International
+            </span>
+            <p class="text-gray-600 text-xs">Pour les dons par virement bancaire (IBAN), PayPal ou Western Union, contactez-nous directement pour recevoir nos coordonnées officielles.</p>
+            <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20faire%20un%20don%20par%20virement%2FPayPal%2FWestern%20Union." target="_blank" class="mt-3 inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 text-sm font-semibold">
+              <i class="fa-solid fa-whatsapp"></i> Nous contacter sur WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-end">
+        <button onclick="closeDonateModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2.5 rounded-xl font-medium transition">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    function animateCounters() {
+      document.querySelectorAll('.counter').forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        let count = 0;
+        const increment = target / 70;
+        const timer = setInterval(() => {
+          count += increment;
+          if (count >= target) {
+            counter.textContent = target + "+";
+            clearInterval(timer);
+          } else {
+            counter.textContent = Math.floor(count) + "+";
+          }
+        }, 25);
+      });
+    }
+
+    let countersAnimated = false;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300 && !countersAnimated) {
+        animateCounters();
+        countersAnimated = true;
+      }
+    });
+
+    // Modal Donation Logic
+    function openDonateModal() {
+      const modal = document.getElementById('donate-modal');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.querySelector('.transform').classList.remove('scale-95');
+      }, 10);
+    }
+
+    function closeDonateModal() {
+      const modal = document.getElementById('donate-modal');
+      modal.classList.add('opacity-0');
+      modal.querySelector('.transform').classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+
+    // Mobile Sidebar Drawer Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
+
+    if (mobileMenuBtn && mobileSidebar && mobileSidebarOverlay) {
+      mobileMenuBtn.addEventListener('click', openSidebar);
+    }
+
+    function openSidebar() {
+      mobileSidebarOverlay.classList.remove('hidden');
+      mobileSidebar.classList.remove('translate-x-full');
+      setTimeout(() => {
+        mobileSidebarOverlay.classList.remove('opacity-0');
+      }, 10);
+    }
+
+    function closeSidebar() {
+      mobileSidebarOverlay.classList.add('opacity-0');
+      mobileSidebar.classList.add('translate-x-full');
+      setTimeout(() => {
+        mobileSidebarOverlay.classList.add('hidden');
+      }, 300);
+    }
+  </script>
+</body>
+</html>

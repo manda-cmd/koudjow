@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À Propos - Association Koudjow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <style>
+    .gradient-text {
+      background: linear-gradient(90deg, #10b981, #eab308, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="font-sans overflow-x-hidden">
+
+  <!-- Navbar -->
+  <nav class="bg-white/95 backdrop-blur-md shadow-xl fixed w-full z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 via-yellow-400 to-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-md group-hover:scale-105 transition-transform">
+          K
+        </div>
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-yellow-500 bg-clip-text text-transparent">Koudjow</h1>
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden lg:flex items-center gap-8 text-base font-medium text-gray-700">
+        <a href="index.html" class="hover:text-emerald-600 transition">Accueil</a>
+        <a href="atelier_luftanza.html" class="hover:text-emerald-600 transition">L'Atelier</a>
+        <a href="boutique.html" class="hover:text-emerald-600 transition">Boutique</a>
+        <a href="a_propos.html" class="text-emerald-600 font-semibold flex items-center gap-1">À Propos</a>
+        <button onclick="openDonateModal()" class="hover:text-emerald-600 transition text-pink-600 font-semibold flex items-center gap-1">
+          <i class="fa-solid fa-heart animate-pulse"></i> Donner
+        </button>
+      </div>
+
+      <!-- Action Button & Hamburger -->
+      <div class="flex items-center gap-4">
+        <button onclick="openDonateModal()" class="hidden sm:flex bg-gradient-to-r from-pink-500 via-yellow-400 to-emerald-500 text-white px-6 py-2.5 rounded-full font-semibold items-center gap-2 hover:scale-105 transition shadow-md text-sm">
+          <i class="fa-solid fa-heart"></i>
+          <span>Faire un Don</span>
+        </button>
+        
+        <button id="mobile-menu-btn" class="lg:hidden text-gray-700 focus:outline-none">
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer (Menu) -->
+    <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
+    
+    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-80 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-6">
+      <div>
+        <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-gradient-to-br from-emerald-500 via-yellow-400 to-pink-500 rounded-xl flex items-center justify-center text-white text-lg font-bold shadow-md">
+              K
+            </div>
+            <span class="text-xl font-bold bg-gradient-to-r from-emerald-600 to-yellow-500 bg-clip-text text-transparent">Koudjow</span>
+          </div>
+          <button onclick="closeSidebar()" class="text-gray-500 hover:text-gray-700 text-2xl focus:outline-none">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <nav class="space-y-4 text-lg font-medium text-gray-700">
+          <a href="index.html" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-600 transition">
+            <i class="fa-solid fa-house text-emerald-500 w-6 text-center"></i> Accueil
+          </a>
+          <a href="atelier_luftanza.html" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-600 transition">
+            <i class="fa-solid fa-scissors text-emerald-500 w-6 text-center"></i> L'Atelier
+          </a>
+          <a href="boutique.html" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-600 transition">
+            <i class="fa-solid fa-bag-shopping text-emerald-500 w-6 text-center"></i> Boutique
+          </a>
+          <a href="a_propos.html" class="flex items-center gap-3 p-3 rounded-2xl bg-emerald-50 text-emerald-600 transition">
+            <i class="fa-solid fa-circle-info text-emerald-500 w-6 text-center"></i> À Propos
+          </a>
+        </nav>
+      </div>
+
+      <div class="space-y-4">
+        <button onclick="openDonateModal(); closeSidebar();" class="w-full bg-gradient-to-r from-pink-500 to-yellow-500 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] transition">
+          <i class="fa-solid fa-heart animate-pulse"></i> Faire un don
+        </button>
+        <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20cr%C3%A9ations." target="_blank" class="w-full border-2 border-emerald-600 text-emerald-700 py-3.5 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-50 transition">
+          <i class="fa-solid fa-whatsapp text-lg"></i> Nous contacter
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero À Propos -->
+  <section class="bg-gradient-to-br from-emerald-700 to-pink-600 text-white py-28">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h1 class="text-6xl md:text-7xl font-bold mb-6" data-aos="fade-up">À Propos de Koudjow</h1>
+      <p class="text-2xl max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+        Une association qui allie mode traditionnelle, autonomisation des femmes et excellence artisanale
+      </p>
+    </div>
+  </section>
+
+  <!-- Notre Histoire -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div data-aos="fade-right">
+          <h2 class="text-5xl font-bold leading-tight mb-8">Notre Histoire</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            Fondée à Kara, l’Association Koudjow est née de la volonté d’une femme déterminée de Lufthansa de valoriser le savoir-faire togolais tout en offrant aux femmes une véritable autonomie économique.
+          </p>
+          <p class="text-lg text-gray-700">
+            Aujourd’hui, ce qui a commencé comme un petit atelier est devenu un véritable mouvement de mode éthique et d’empowerment féminin dans la région de la Kara.
+          </p>
+        </div>
+        <div data-aos="fade-left">
+          <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=2070" 
+               class="rounded-3xl shadow-2xl w-full" alt="Histoire Koudjow">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="py-20 bg-gradient-to-br from-emerald-50 to-yellow-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="bg-white p-10 rounded-3xl shadow-xl" data-aos="fade-up">
+          <h3 class="text-3xl font-bold mb-6 flex items-center gap-4">
+            <span class="text-4xl">🎯</span> Notre Mission
+          </h3>
+          <p class="text-gray-700 text-lg">
+            Autonomiser les femmes et les jeunes de Kara à travers la formation en couture, teinture et tissage, tout en promouvant le patrimoine culturel togolais à travers des créations modernes et de haute qualité.
+          </p>
+        </div>
+        <div class="bg-white p-10 rounded-3xl shadow-xl" data-aos="fade-up" data-aos-delay="150">
+          <h3 class="text-3xl font-bold mb-6 flex items-center gap-4">
+            <span class="text-4xl">🌟</span> Notre Vision
+          </h3>
+          <p class="text-gray-700 text-lg">
+            Devenir la référence togolaise en matière de mode éthique et artisanale, tout en créant un impact social durable pour des centaines de femmes et leurs familles.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valeurs -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Nos Valeurs</h2>
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="text-center" data-aos="fade-up">
+          <div class="text-6xl mb-6">🤝</div>
+          <h4 class="font-bold text-xl mb-3">Autonomisation</h4>
+          <p class="text-gray-600">Donner aux femmes les outils pour être indépendantes</p>
+        </div>
+        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="text-6xl mb-6">🌍</div>
+          <h4 class="font-bold text-xl mb-3">Tradition</h4>
+          <p class="text-gray-600">Valoriser et moderniser notre héritage culturel</p>
+        </div>
+        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="text-6xl mb-6">♻️</div>
+          <h4 class="font-bold text-xl mb-3">Éthique</h4>
+          <p class="text-gray-600">Pratiques durables et respectueuses de l’environnement</p>
+        </div>
+        <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="text-6xl mb-6">❤️</div>
+          <h4 class="font-bold text-xl mb-3">Excellence</h4>
+          <p class="text-gray-600">Qualité artisanale et attention aux détails</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nos Grands Projets -->
+  <section class="py-24 bg-gradient-to-br from-emerald-50 via-white to-yellow-50/30 border-t border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <span class="text-emerald-600 font-bold uppercase tracking-wider text-sm">Programmes & Projets</span>
+        <h2 class="text-4xl md:text-5xl font-bold mt-2 text-gray-900 leading-tight">
+          Nos Actions & Projets de Croissance
+        </h2>
+        <p class="text-gray-600 mt-4 text-lg">
+          Mise en place d’un grand programme d’action axé sur des formations professionnelles multisectorielles et porteuses de croissance, cadrant avec le Plan National de Développement (PND).
+        </p>
+      </div>
+
+      <div class="space-y-16">
+        <!-- Projet 1 -->
+        <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
+          <div class="order-2 md:order-1">
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-4 py-1.5 rounded-full uppercase">Éducation et Formation</span>
+            <h3 class="text-3xl font-bold text-gray-900 mt-4 mb-6">Formation Professionnelle aux Métiers</h3>
+            <p class="text-gray-700 leading-relaxed mb-6">
+              Au sein de l’Association KOUDJOW, nous avons une initiative dédiée à la Formation Professionnelle aux Métiers, visant à autonomiser les personnes vulnérables. Nos programmes variés, couvrant des métiers tels que la <strong>couture</strong>, la <strong>teinture</strong>, le <strong>tissage</strong> et la <strong>fabrication de savon</strong>, offrent un encadrement dévoué par des formateurs expérimentés, des opportunités d’emploi et une approche inclusive, mettant l’accent sur l’autonomisation des orphelins, des personnes handicapées, des jeunes filles déscolarisées et d’autres groupes défavorisés.
+            </p>
+          </div>
+          <div class="order-1 md:order-2 rounded-3xl overflow-hidden shadow-xl aspect-video md:aspect-auto md:h-96">
+            <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=2070" class="w-full h-full object-cover" alt="Formation Professionnelle">
+          </div>
+        </div>
+
+        <!-- Projet 2 -->
+        <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
+          <div class="rounded-3xl overflow-hidden shadow-xl aspect-video md:aspect-auto md:h-96">
+            <img src="https://images.unsplash.com/photo-1591343395084-7c4e9c3f8e0f?q=80&w=2070" class="w-full h-full object-cover" alt="Protection de l'Environnement">
+          </div>
+          <div>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-4 py-1.5 rounded-full uppercase">Sensibilisations</span>
+            <h3 class="text-3xl font-bold text-gray-900 mt-4 mb-6">Protection de l'Environnement</h3>
+            <p class="text-gray-700 leading-relaxed mb-6">
+              À l’Association KOUDJOW, nous croyons en la création d’une conscience collective autour des enjeux environnementaux. À travers des programmes éducatifs, nous informons sur l’importance du reboisement, encourageons l’utilisation de <strong>pesticides naturels élaborés à partir de graines de neem (nem)</strong>, et sensibilisons nos bénéficiaires aux pratiques respectueuses de l’environnement. Ensemble, nous œuvrons à la préservation de notre planète et à l’autonomisation des communautés défavorisées par le biais de pratiques durables.
+            </p>
+          </div>
+        </div>
+
+        <!-- Projet 3 -->
+        <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
+          <div class="order-2 md:order-1">
+            <span class="bg-pink-100 text-pink-800 text-xs font-semibold px-4 py-1.5 rounded-full uppercase">Actions de Solidarité et Santé</span>
+            <h3 class="text-3xl font-bold text-gray-900 mt-4 mb-6">Solidarité, Aide d'Urgence et Santé</h3>
+            <p class="text-gray-700 leading-relaxed mb-6">
+              L’Association KOUDJOW s’engage résolument dans des Actions de Solidarité, d’Aide d’Urgence et de Santé pour répondre aux besoins immédiats des communautés défavorisées. À travers des interventions ciblées, nous fournissons une assistance d’urgence aux personnes touchées par des crises, tout en mettant en place des programmes de santé visant à renforcer les infrastructures médicales et à sensibiliser sur les pratiques préventives. Notre objectif est d’apporter un soutien tangible, que ce soit en fournissant des fournitures médicales essentielles, en organisant des cliniques mobiles ou en initiant des campagnes de sensibilisation.
+            </p>
+          </div>
+          <div class="order-1 md:order-2 rounded-3xl overflow-hidden shadow-xl aspect-video md:aspect-auto md:h-96">
+            <img src="https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2070" class="w-full h-full object-cover" alt="Solidarité et Santé">
+          </div>
+        </div>
+
+        <!-- Projet 4 -->
+        <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
+          <div class="rounded-3xl overflow-hidden shadow-xl aspect-video md:aspect-auto md:h-96">
+            <img src="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?q=80&w=2070" class="w-full h-full object-cover" alt="Entrepreneuriat et Agroalimentaire">
+          </div>
+          <div>
+            <span class="bg-teal-100 text-teal-800 text-xs font-semibold px-4 py-1.5 rounded-full uppercase">Entrepreneuriat et Agroalimentaire</span>
+            <h3 class="text-3xl font-bold text-gray-900 mt-4 mb-6">Stimuler le Développement Local</h3>
+            <p class="text-gray-700 leading-relaxed mb-6">
+              Dans notre engagement en faveur de l’autonomisation, l’Association KOUDJOW favorise l’Entrepreneuriat et l’Agroalimentaire en offrant des opportunités de formation et de développement. Nous encourageons la création d’entreprises locales, notamment dans le domaine agroalimentaire, en fournissant des formations spécialisées. Que ce soit par l’apprentissage de techniques agricoles durables, la transformation alimentaire ou la gestion d’activités génératrices de revenus, notre objectif est de stimuler l’esprit entrepreneurial au sein des communautés vulnérables.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- L'Équipe / La Dame de Lufthansa -->
+  <section class="py-20 bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-12" data-aos="fade-up">La Force derrière Koudjow</h2>
+      <div class="max-w-2xl mx-auto">
+        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=2070" 
+             class="w-80 h-80 mx-auto rounded-3xl object-cover shadow-2xl mb-8" alt="Fondatrice">
+        <h3 class="text-2xl font-semibold mb-2">Madame Essi Koudjow</h3>
+        <p class="text-emerald-400 font-medium">Fondatrice & Responsable de l’Atelier Lufthansa</p>
+        <p class="mt-8 text-gray-300 text-lg">
+          "Mon rêve est de voir chaque femme de notre communauté vivre dignement grâce à ses talents et à ses mains."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 text-gray-300 pt-20 pb-10 border-t border-gray-900">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 via-yellow-400 to-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-md">
+            K
+          </div>
+          <span class="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-yellow-300 bg-clip-text text-transparent">Koudjow</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Association à but non lucratif basée à Kara, Togo. Nous œuvrons pour l'indépendance économique des femmes et des jeunes filles à travers la valorisation et la modernisation des textiles traditionnels.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-bold text-lg">Navigation</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="index.html" class="hover:text-emerald-400 transition">Accueil</a></li>
+          <li><a href="atelier_luftanza.html" class="hover:text-emerald-400 transition">L'Atelier Lufthansa</a></li>
+          <li><a href="boutique.html" class="hover:text-emerald-400 transition">La Boutique</a></li>
+          <li><a href="a_propos.html" class="hover:text-emerald-400 transition">À Propos</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-bold text-lg">Contact</h4>
+        <ul class="space-y-3 text-sm text-gray-400">
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-location-dot text-emerald-500 mt-1"></i>
+            <span>Quartier Lufthansa, Kara, Togo</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-phone text-emerald-500"></i>
+            <span>+228 90 12 34 56</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-envelope text-emerald-500"></i>
+            <span>contact@koudjow-association.org</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-bold text-lg">Transparence</h4>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          100% de vos dons soutiennent directement nos programmes de formation à Kara. Association enregistrée au Ministère de l'Administration Territoriale du Togo.
+        </p>
+        <button onclick="openDonateModal()" class="w-full bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 text-white font-semibold py-3 px-6 rounded-2xl transition duration-300 flex items-center justify-center gap-2 shadow-lg">
+          <i class="fa-solid fa-heart text-white"></i> Faire un don
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-gray-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+      <p>&copy; 2026 Association Koudjow. Tous droits réservés.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white transition">Mentions légales</a>
+        <a href="#" class="hover:text-white transition">Politique de confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Donation Modal -->
+  <div id="donate-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl max-w-lg w-full mx-4 overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative">
+      <div class="bg-gradient-to-r from-emerald-600 to-teal-500 text-white px-8 py-6 relative">
+        <h3 class="text-2xl font-bold">Faire un don à Koudjow</h3>
+        <p class="text-white/80 text-sm mt-1">Soutenez l'autonomisation des femmes de Kara</p>
+        <button onclick="closeDonateModal()" class="absolute top-6 right-6 text-white hover:text-yellow-300 text-2xl font-bold transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-8 space-y-6 max-h-[65vh] overflow-y-auto">
+        <div class="bg-emerald-50 rounded-2xl p-4 flex gap-3 text-emerald-800 text-sm">
+          <i class="fa-solid fa-circle-info text-emerald-600 text-lg mt-0.5"></i>
+          <p>Chaque don est intégralement utilisé pour financer des machines à coudre, des fournitures de teinture et des bourses de formation professionnelle pour les femmes vulnérables.</p>
+        </div>
+
+        <div class="space-y-4">
+          <h4 class="font-bold text-gray-800">Choisissez votre moyen de paiement :</h4>
+
+          <div class="border border-gray-200 rounded-2xl p-4 hover:border-emerald-500 transition duration-300">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-semibold text-gray-800 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                T-Money (Togo)
+              </span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-medium">Recommandé</span>
+            </div>
+            <p class="text-gray-600 text-sm">Envoyer au numéro : <strong class="text-gray-900">+228 90 12 34 56</strong></p>
+            <p class="text-gray-500 text-xs mt-1">Nom : Association Koudjow</p>
+          </div>
+
+          <div class="border border-gray-200 rounded-2xl p-4 hover:border-emerald-500 transition duration-300">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-semibold text-gray-800 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                Moov Money / Flooz
+              </span>
+            </div>
+            <p class="text-gray-600 text-sm">Envoyer au numéro : <strong class="text-gray-900">+228 99 87 65 43</strong></p>
+            <p class="text-gray-500 text-xs mt-1">Nom : Association Koudjow</p>
+          </div>
+
+          <div class="border border-gray-200 rounded-2xl p-4 hover:border-emerald-500 transition duration-300">
+            <span class="font-semibold text-gray-800 flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+              Virement Bancaire & International
+            </span>
+            <p class="text-gray-600 text-xs">Pour les dons par virement bancaire (IBAN), PayPal ou Western Union, contactez-nous directement pour recevoir nos coordonnées officielles.</p>
+            <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20faire%20un%20don%20par%20virement%2FPayPal%2FWestern%20Union." target="_blank" class="mt-3 inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 text-sm font-semibold">
+              <i class="fa-solid fa-whatsapp"></i> Nous contacter sur WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-end">
+        <button onclick="closeDonateModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2.5 rounded-xl font-medium transition">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+
+    // Modal Donation Logic
+    function openDonateModal() {
+      const modal = document.getElementById('donate-modal');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.querySelector('.transform').classList.remove('scale-95');
+      }, 10);
+    }
+
+    function closeDonateModal() {
+      const modal = document.getElementById('donate-modal');
+      modal.classList.add('opacity-0');
+      modal.querySelector('.transform').classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+
+    // Mobile Sidebar Drawer Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
+
+    if (mobileMenuBtn && mobileSidebar && mobileSidebarOverlay) {
+      mobileMenuBtn.addEventListener('click', openSidebar);
+    }
+
+    function openSidebar() {
+      mobileSidebarOverlay.classList.remove('hidden');
+      mobileSidebar.classList.remove('translate-x-full');
+      setTimeout(() => {
+        mobileSidebarOverlay.classList.remove('opacity-0');
+      }, 10);
+    }
+
+    function closeSidebar() {
+      mobileSidebarOverlay.classList.add('opacity-0');
+      mobileSidebar.classList.add('translate-x-full');
+      setTimeout(() => {
+        mobileSidebarOverlay.classList.add('hidden');
+      }, 300);
+    }
+  </script>
+</body>
+</html>

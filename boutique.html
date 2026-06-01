@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique - Association Koudjow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <style>
+    .product-card {
+      transition: all 0.5s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-15px) scale(1.04);
+      box-shadow: 0 25px 50px -12px rgb(16 185 129 / 0.25);
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #10b981, #eab308, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="font-sans overflow-x-hidden">
+
+  <!-- Navbar -->
+  <nav class="bg-white/95 backdrop-blur-md shadow-xl fixed w-full z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 via-yellow-400 to-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-md group-hover:scale-105 transition-transform">
+          K
+        </div>
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-yellow-500 bg-clip-text text-transparent">Koudjow</h1>
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden lg:flex items-center gap-8 text-base font-medium text-gray-700">
+        <a href="index.html" class="hover:text-emerald-600 transition">Accueil</a>
+        <a href="atelier_luftanza.html" class="hover:text-emerald-600 transition">L'Atelier</a>
+        <a href="boutique.html" class="text-emerald-600 font-semibold flex items-center gap-1">Boutique</a>
+        <a href="a_propos.html" class="hover:text-emerald-600 transition">À Propos</a>
+        <button onclick="openDonateModal()" class="hover:text-emerald-600 transition text-pink-600 font-semibold flex items-center gap-1">
+          <i class="fa-solid fa-heart animate-pulse"></i> Donner
+        </button>
+      </div>
+
+      <!-- Action Button & Hamburger -->
+      <div class="flex items-center gap-4">
+        <button onclick="openDonateModal()" class="hidden sm:flex bg-gradient-to-r from-pink-500 via-yellow-400 to-emerald-500 text-white px-6 py-2.5 rounded-full font-semibold items-center gap-2 hover:scale-105 transition shadow-md text-sm">
+          <i class="fa-solid fa-heart"></i>
+          <span>Faire un Don</span>
+        </button>
+        
+        <button id="mobile-menu-btn" class="lg:hidden text-gray-700 focus:outline-none">
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer (Menu) -->
+    <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300" onclick="closeSidebar()"></div>
+    
+    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-80 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-6">
+      <div>
+        <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-gradient-to-br from-emerald-500 via-yellow-400 to-pink-500 rounded-xl flex items-center justify-center text-white text-lg font-bold shadow-md">
+              K
+            </div>
+            <span class="text-xl font-bold bg-gradient-to-r from-emerald-600 to-yellow-500 bg-clip-text text-transparent">Koudjow</span>
+          </div>
+          <button onclick="closeSidebar()" class="text-gray-500 hover:text-gray-700 text-2xl focus:outline-none">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <nav class="space-y-4 text-lg font-medium text-gray-700">
+          <a href="index.html" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-600 transition">
+            <i class="fa-solid fa-house text-emerald-500 w-6 text-center"></i> Accueil
+          </a>
+          <a href="atelier_luftanza.html" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-600 transition">
+            <i class="fa-solid fa-scissors text-emerald-500 w-6 text-center"></i> L'Atelier
+          </a>
+          <a href="boutique.html" class="flex items-center gap-3 p-3 rounded-2xl bg-emerald-50 text-emerald-600 transition">
+            <i class="fa-solid fa-bag-shopping text-emerald-500 w-6 text-center"></i> Boutique
+          </a>
+          <a href="a_propos.html" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-600 transition">
+            <i class="fa-solid fa-circle-info text-emerald-500 w-6 text-center"></i> À Propos
+          </a>
+        </nav>
+      </div>
+
+      <div class="space-y-4">
+        <button onclick="openDonateModal(); closeSidebar();" class="w-full bg-gradient-to-r from-pink-500 to-yellow-500 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] transition">
+          <i class="fa-solid fa-heart animate-pulse"></i> Faire un don
+        </button>
+        <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20cr%C3%A9ations." target="_blank" class="w-full border-2 border-emerald-600 text-emerald-700 py-3.5 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-50 transition">
+          <i class="fa-solid fa-whatsapp text-lg"></i> Nous contacter
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Boutique -->
+  <section class="bg-gradient-to-br from-emerald-600 to-pink-600 text-white py-24">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h1 class="text-6xl font-bold mb-6" data-aos="fade-up">Notre Boutique</h1>
+      <p class="text-2xl max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+        Créations uniques faites à la main à l'Atelier de Lufthansa
+      </p>
+    </div>
+  </section>
+
+  <!-- Filtres -->
+  <section class="sticky top-0 bg-white shadow-md z-40 py-6">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+        <button class="filter-btn active px-6 py-3 rounded-3xl border border-emerald-200 hover:bg-emerald-50">Tout</button>
+        <button class="filter-btn px-6 py-3 rounded-3xl border border-emerald-200 hover:bg-emerald-50">Femme</button>
+        <button class="filter-btn px-6 py-3 rounded-3xl border border-emerald-200 hover:bg-emerald-50">Homme</button>
+        <button class="filter-btn px-6 py-3 rounded-3xl border border-emerald-200 hover:bg-emerald-50">Pagne</button>
+        <button class="filter-btn px-6 py-3 rounded-3xl border border-emerald-200 hover:bg-emerald-50">Ensemble</button>
+        <button class="filter-btn px-6 py-3 rounded-3xl border border-emerald-200 hover:bg-emerald-50">Accessoires</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grille des Produits -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+        <!-- Produit 1 -->
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-lg" data-aos="fade-up">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1622445275576-721325763afe?q=80&w=2070" 
+                 class="w-full h-80 object-cover" alt="Pagne Indigo">
+            <span class="absolute top-4 right-4 bg-white text-emerald-600 text-xs font-bold px-3 py-1 rounded-full">Nouveau</span>
+          </div>
+          <div class="p-6">
+            <h4 class="font-bold text-xl mb-1">Pagne Indigo Royal</h4>
+            <p class="text-gray-500 text-sm">Teinture naturelle • Femme</p>
+            <p class="text-3xl font-bold text-emerald-600 mt-4">28 000 CFA</p>
+            <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20commander%20le%20Pagne%20Indigo%20Royal%20au%20prix%20de%2028%20000%20CFA." target="_blank" class="mt-6 w-full bg-gradient-to-r from-emerald-50 to-emerald-100 hover:from-emerald-500 hover:to-teal-500 hover:text-white text-emerald-700 py-4 rounded-2xl font-semibold hover:scale-105 transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-whatsapp text-lg"></i> Commander sur WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Produit 2 -->
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1591343395084-7c4e9c3f8e0f?q=80&w=2070" 
+                 class="w-full h-80 object-cover" alt="Ensemble Bogolan">
+            <span class="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">Populaire</span>
+          </div>
+          <div class="p-6">
+            <h4 class="font-bold text-xl mb-1">Ensemble Bogolan Soleil</h4>
+            <p class="text-gray-500 text-sm">Homme • Tradition Moderne</p>
+            <p class="text-3xl font-bold text-emerald-600 mt-4">52 000 CFA</p>
+            <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20commander%20l%27Ensemble%20Bogolan%20Soleil%20au%20prix%20de%2052%20000%20CFA." target="_blank" class="mt-6 w-full bg-gradient-to-r from-emerald-50 to-emerald-100 hover:from-emerald-500 hover:to-teal-500 hover:text-white text-emerald-700 py-4 rounded-2xl font-semibold hover:scale-105 transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-whatsapp text-lg"></i> Commander sur WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Produit 3 -->
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+          <img src="https://images.unsplash.com/photo-1585487000160-6eb1fcb7c0a3?q=80&w=2070" 
+               class="w-full h-80 object-cover" alt="Robe Fleurie">
+          <div class="p-6">
+            <h4 class="font-bold text-xl mb-1">Robe Fleur Tropicale</h4>
+            <p class="text-gray-500 text-sm">Femme • Élégante</p>
+            <p class="text-3xl font-bold text-emerald-600 mt-4">35 000 CFA</p>
+            <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20commander%20la%20Robe%20Fleur%20Tropicale%20au%20prix%20de%2035%20000%20CFA." target="_blank" class="mt-6 w-full bg-gradient-to-r from-emerald-50 to-emerald-100 hover:from-emerald-500 hover:to-teal-500 hover:text-white text-emerald-700 py-4 rounded-2xl font-semibold hover:scale-105 transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-whatsapp text-lg"></i> Commander sur WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Produit 4 -->
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+          <img src="https://images.unsplash.com/photo-1604176354201-9268730608-1d5f8e7e8b3f?q=80&w=2070" 
+               class="w-full h-80 object-cover" alt="Écharpe">
+          <div class="p-6">
+            <h4 class="font-bold text-xl mb-1">Écharpe Arc-en-Ciel</h4>
+            <p class="text-gray-500 text-sm">Accessoire • Unisexe</p>
+            <p class="text-3xl font-bold text-emerald-600 mt-4">18 000 CFA</p>
+            <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20commander%20l%27%C3%89charpe%20Arc-en-Ciel%20au%20prix%20de%2018%20000%20CFA." target="_blank" class="mt-6 w-full bg-gradient-to-r from-emerald-50 to-emerald-100 hover:from-emerald-500 hover:to-teal-500 hover:text-white text-emerald-700 py-4 rounded-2xl font-semibold hover:scale-105 transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-whatsapp text-lg"></i> Commander sur WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Tu peux ajouter plus de produits ici -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-20 bg-gradient-to-br from-pink-500 via-yellow-400 to-emerald-500 text-white text-center">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Vous ne trouvez pas ce que vous cherchez ?</h2>
+      <p class="text-xl mb-10" data-aos="fade-up" data-aos-delay="100">Contactez-nous directement pour des pièces sur mesure</p>
+      <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20faire%20faire%20des%20cr%C3%A9ations%20sur%20mesure." target="_blank" class="inline-flex bg-white text-pink-600 px-12 py-6 rounded-3xl text-2xl font-semibold hover:scale-110 transition items-center gap-4 mx-auto" data-aos="fade-up">
+        <i class="fa-solid fa-whatsapp text-3xl"></i>
+        Nous contacter sur WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 text-gray-300 pt-20 pb-10 border-t border-gray-900">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 via-yellow-400 to-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-md">
+            K
+          </div>
+          <span class="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-yellow-300 bg-clip-text text-transparent">Koudjow</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Association à but non lucratif basée à Kara, Togo. Nous œuvrons pour l'indépendance économique des femmes et des jeunes filles à travers la valorisation et la modernisation des textiles traditionnels.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-bold text-lg">Navigation</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="index.html" class="hover:text-emerald-400 transition">Accueil</a></li>
+          <li><a href="atelier_luftanza.html" class="hover:text-emerald-400 transition">L'Atelier Lufthansa</a></li>
+          <li><a href="boutique.html" class="hover:text-emerald-400 transition">La Boutique</a></li>
+          <li><a href="a_propos.html" class="hover:text-emerald-400 transition">À Propos</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-bold text-lg">Contact</h4>
+        <ul class="space-y-3 text-sm text-gray-400">
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-location-dot text-emerald-500 mt-1"></i>
+            <span>Quartier Lufthansa, Kara, Togo</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-phone text-emerald-500"></i>
+            <span>+228 90 12 34 56</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-envelope text-emerald-500"></i>
+            <span>contact@koudjow-association.org</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-bold text-lg">Transparence</h4>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          100% de vos dons soutiennent directement nos programmes de formation à Kara. Association enregistrée au Ministère de l'Administration Territoriale du Togo.
+        </p>
+        <button onclick="openDonateModal()" class="w-full bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 text-white font-semibold py-3 px-6 rounded-2xl transition duration-300 flex items-center justify-center gap-2 shadow-lg">
+          <i class="fa-solid fa-heart text-white"></i> Faire un don
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-gray-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+      <p>&copy; 2026 Association Koudjow. Tous droits réservés.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white transition">Mentions légales</a>
+        <a href="#" class="hover:text-white transition">Politique de confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Donation Modal -->
+  <div id="donate-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl max-w-lg w-full mx-4 overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative">
+      <div class="bg-gradient-to-r from-emerald-600 to-teal-500 text-white px-8 py-6 relative">
+        <h3 class="text-2xl font-bold">Faire un don à Koudjow</h3>
+        <p class="text-white/80 text-sm mt-1">Soutenez l'autonomisation des femmes de Kara</p>
+        <button onclick="closeDonateModal()" class="absolute top-6 right-6 text-white hover:text-yellow-300 text-2xl font-bold transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-8 space-y-6 max-h-[65vh] overflow-y-auto">
+        <div class="bg-emerald-50 rounded-2xl p-4 flex gap-3 text-emerald-800 text-sm">
+          <i class="fa-solid fa-circle-info text-emerald-600 text-lg mt-0.5"></i>
+          <p>Chaque don est intégralement utilisé pour financer des machines à coudre, des fournitures de teinture et des bourses de formation professionnelle pour les femmes vulnérables.</p>
+        </div>
+
+        <div class="space-y-4">
+          <h4 class="font-bold text-gray-800">Choisissez votre moyen de paiement :</h4>
+
+          <div class="border border-gray-200 rounded-2xl p-4 hover:border-emerald-500 transition duration-300">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-semibold text-gray-800 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                T-Money (Togo)
+              </span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-medium">Recommandé</span>
+            </div>
+            <p class="text-gray-600 text-sm">Envoyer au numéro : <strong class="text-gray-900">+228 90 12 34 56</strong></p>
+            <p class="text-gray-500 text-xs mt-1">Nom : Association Koudjow</p>
+          </div>
+
+          <div class="border border-gray-200 rounded-2xl p-4 hover:border-emerald-500 transition duration-300">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-semibold text-gray-800 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                Moov Money / Flooz
+              </span>
+            </div>
+            <p class="text-gray-600 text-sm">Envoyer au numéro : <strong class="text-gray-900">+228 99 87 65 43</strong></p>
+            <p class="text-gray-500 text-xs mt-1">Nom : Association Koudjow</p>
+          </div>
+
+          <div class="border border-gray-200 rounded-2xl p-4 hover:border-emerald-500 transition duration-300">
+            <span class="font-semibold text-gray-800 flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+              Virement Bancaire & International
+            </span>
+            <p class="text-gray-600 text-xs">Pour les dons par virement bancaire (IBAN), PayPal ou Western Union, contactez-nous directement pour recevoir nos coordonnées officielles.</p>
+            <a href="https://wa.me/22890123456?text=Bonjour%20Koudjow%2C%20je%20souhaite%20faire%20un%20don%20par%20virement%2FPayPal%2FWestern%20Union." target="_blank" class="mt-3 inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 text-sm font-semibold">
+              <i class="fa-solid fa-whatsapp"></i> Nous contacter sur WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-end">
+        <button onclick="closeDonateModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2.5 rounded-xl font-medium transition">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+
+    // Filtre actif (simulation)
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'bg-emerald-600', 'text-white'));
+        btn.classList.add('active', 'bg-emerald-600', 'text-white');
+      });
+    });
+
+    // Modal Donation Logic
+    function openDonateModal() {
+      const modal = document.getElementById('donate-modal');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.querySelector('.transform').classList.remove('scale-95');
+      }, 10);
+    }
+
+    function closeDonateModal() {
+      const modal = document.getElementById('donate-modal');
+      modal.classList.add('opacity-0');
+      modal.querySelector('.transform').classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+
+    // Mobile Sidebar Drawer Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
+
+    if (mobileMenuBtn && mobileSidebar && mobileSidebarOverlay) {
+      mobileMenuBtn.addEventListener('click', openSidebar);
+    }
+
+    function openSidebar() {
+      mobileSidebarOverlay.classList.remove('hidden');
+      mobileSidebar.classList.remove('translate-x-full');
+      setTimeout(() => {
+        mobileSidebarOverlay.classList.remove('opacity-0');
+      }, 10);
+    }
+
+    function closeSidebar() {
+      mobileSidebarOverlay.classList.add('opacity-0');
+      mobileSidebar.classList.add('translate-x-full');
+      setTimeout(() => {
+        mobileSidebarOverlay.classList.add('hidden');
+      }, 300);
+    }
+  </script>
+</body>
+</html>
